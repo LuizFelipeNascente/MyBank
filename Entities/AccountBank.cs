@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using MyBank.Services;
+using MyBank.Contracts;
 
 namespace MyBank.Entities;
 

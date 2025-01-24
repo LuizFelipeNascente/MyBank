@@ -1,6 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using MyBank.Services;
+using MyBank.Contracts;
 using MyBank.Data;
 
 namespace MyBank.Entities;
