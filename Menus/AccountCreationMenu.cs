@@ -58,9 +58,8 @@ public class AccountCreationMenu
             accountBank.SetEmail(email);
             accountBank.SetPassword(password);
 
-            context.Account.AddRange(accountBank);
-            context.SaveChanges();
-            Console.WriteLine("Conta criada com sucesso");
+            Account account = new Account();
+            account.Create(accountBank);
              
 
         }
