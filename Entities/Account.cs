@@ -7,17 +7,15 @@ namespace MyBank.Entities;
 public class Account
 {
 
-    public decimal Balance { get; set; }
+    public decimal Balance { get; set; } = 0;
     public int AccountNumber { get; set; }
-    public DateTime Addon { get; set; } 
+    public DateTime Addon { get; set; } = DateTime.Now;
     
  
     public void Create(AccountBank accountBank)
     {
         accountBank.AccountNumber = CheckAccountNumber();
-        accountBank.Balance = 0;
-        accountBank.Addon = DateTime.Now;
-
+        
         var context = new AppDbContext();
 
         context.Account.Add(accountBank);

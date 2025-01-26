@@ -2,8 +2,20 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using MyBank.Contracts;
+using MyBank.Enums;
 
 namespace MyBank.Entities;
+
+// Review - Criação de Conta
+// validar a unicidade do e-mail ou número de telefone 
+// A senha deve ter pelo menos 8 caracteres, incluindo letras, números e caracteres especiais. 
+
+
+// Review - Depósitos
+//
+// Um recibo de depósito deve ser gerado e enviado ao usuário. 
+
+// Implementar Extrato bancario.
 
 public class AccountBank : Account
 {
@@ -12,7 +24,7 @@ public class AccountBank : Account
         public string Phone { get; set; }
         public string Email { get; set; } 
         public string Password { get; set; }
-        public DateTime Addon { get; set; } 
+        public AccountStatus Status {get; set; } = AccountStatus.Active;
         
         public void SetName(string name)
         {
@@ -40,6 +52,7 @@ public class AccountBank : Account
                 this.Balance = Balance + value;
         }
 
+        
         public bool Withdraw(decimal value)
         {
                 if(value > Balance)
