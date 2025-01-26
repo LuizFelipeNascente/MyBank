@@ -10,6 +10,8 @@ public class AppDbContext : DbContext
 
             public DbSet<AccountBank> Account { get; set; }
 
+            //public DbSet<Transactions> Transactions { get; set; }
+
             public AppDbContext()
             {
                 DbPath = "Mybank.db";

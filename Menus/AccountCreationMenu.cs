@@ -8,7 +8,8 @@ namespace MyBank.Menus;
 
 public class AccountCreationMenu
 {
-    public void CreateAccount(AppDbContext context)
+    //Existe um bug quando um dado não é preenchido 
+    public void CreateAccount() 
         {
             Console.Clear();
 
@@ -21,8 +22,8 @@ public class AccountCreationMenu
             if(string.IsNullOrEmpty(name)) 
             {
                 Console.Write("Todos os dados são obrigatorios!");
-                System.Threading.Thread.Sleep(2000); 
-                CreateAccount(context);
+                System.Threading.Thread.Sleep(1500); 
+                CreateAccount();
             }
 
             Console.Write("Informe seu Telefone: ");
@@ -30,8 +31,8 @@ public class AccountCreationMenu
             if(string.IsNullOrEmpty(phone)) 
             {
                 Console.Write("Todos os dados são obrigatorios!");
-                System.Threading.Thread.Sleep(2000); 
-                CreateAccount(context);
+                System.Threading.Thread.Sleep(1500); 
+                CreateAccount();
             }
 
             Console.Write("Informe seu e-mail: ");
@@ -39,8 +40,8 @@ public class AccountCreationMenu
             if(string.IsNullOrEmpty(email)) 
             {
                 Console.Write("Todos os dados são obrigatorios!");
-                System.Threading.Thread.Sleep(2000); 
-                CreateAccount(context);
+                System.Threading.Thread.Sleep(1500); 
+                CreateAccount();
             }
 
             Console.Write("Informe sua Senha: ");
@@ -48,8 +49,8 @@ public class AccountCreationMenu
             if(string.IsNullOrEmpty(password)) 
             {
                 Console.Write("Todos os dados são obrigatorios!");
-                System.Threading.Thread.Sleep(2000); 
-                CreateAccount(context);
+                System.Threading.Thread.Sleep(1500); 
+                CreateAccount();
             }
 
             AccountBank accountBank = new AccountBank();
