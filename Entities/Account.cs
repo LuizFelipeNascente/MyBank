@@ -1,52 +1,40 @@
 using System;
-using Microsoft.EntityFrameworkCore;
-using MyBank.Contracts;
 using MyBank.Data;
+using MyBank.Menus;
 
 namespace MyBank.Entities;
 
-public class Account : IAccount
+public class Account
 {
 
-    public Account()
-    {
-        this.AccountNumber = "000001";
-        Account.OtherAccounts ++;
-    }
-
-    public double Balance { get; set; }
-    public string AccountNumber { get; set; }
-    public static int OtherAccounts { get; set; }
+    public decimal Balance { get; set; }
+    public int AccountNumber { get; set; }
+    public DateTime Addon { get; set; } 
     
-    public void Create(AccountBank data)
+ 
+    public void Create(AccountBank accountBank)
     {
+        accountBank.AccountNumber = CheckAccountNumber();
+        accountBank.Balance = 0;
+        accountBank.Addon = DateTime.Now;
+
         var context = new AppDbContext();
-        context.Account.AddRange(data);
+
+        context.Account.Add(accountBank);
         context.SaveChanges();
         Console.WriteLine("Conta criada com sucesso");
+        System.Threading.Thread.Sleep(1500);
+        new HomeMenu();
+       
     }
-    public void Deposit(double value)
+    
+    public int CheckAccountNumber()
     {
-        this.Balance = Balance + value;
-    }
+        var context = new AppDbContext();
+        int lastaccount = context.Account.Max(l => (int?)l.AccountNumber) ?? 0;
 
-    public bool Withdraw(double value)
-    {
-        if(value > Balance)
-        return false;
+        return lastaccount + 1;
 
-        Balance = Balance - value;
-        return true;
-    }
-
-    public double CheckBalance()
-    {
-        return this.Balance;
-    }
-
-    public string CheckAccountNumber()
-    {
-        return this.AccountNumber;
     }
 
 }
