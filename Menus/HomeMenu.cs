@@ -30,8 +30,12 @@ public class HomeMenu
                 case HomeMenuOptions.Entrar: new LoginToMenu().Login();
                 break;
 
-                case HomeMenuOptions.Sair: Console.Clear(); Console.WriteLine("Saindo conta ...."); 
-                break;
+                case HomeMenuOptions.Sair: Console.Clear(); 
+                Console.WriteLine("Saindo do sistema ...."); 
+                System.Threading.Thread.Sleep(1000);
+                Console.Clear();
+                return; 
+                
             }
     }
 }
