@@ -1,8 +1,6 @@
 using System;
 using MyBank.Enums;
 using Spectre.Console;
-using MyBank.Data;
-using MyBank.Entities;
 
 
 namespace MyBank.Menus;
@@ -10,7 +8,7 @@ namespace MyBank.Menus;
 public class HomeMenu
 {
 
-    static HomeMenu()
+    public HomeMenu()
     {
         Console.Clear();
 
@@ -23,11 +21,10 @@ public class HomeMenu
             HomeMenuOptions.CriarConta,
             HomeMenuOptions.Entrar,
             HomeMenuOptions.Sair));
-            using (var context = new AppDbContext())
-
+            
             switch(opt)
             {
-                case HomeMenuOptions.CriarConta: new AccountCreationMenu().CreateAccount(context);
+                case HomeMenuOptions.CriarConta: new AccountCreationMenu().CreateAccount();
                 break;
 
                 case HomeMenuOptions.Entrar: new LoginToMenu().Login();
