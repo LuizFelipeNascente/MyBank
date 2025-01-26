@@ -5,16 +5,15 @@ using MyBank.Contracts;
 
 namespace MyBank.Entities;
 
-public class AccountBank
+public class AccountBank : Account
 {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; } 
         public string Password { get; set; }
-        [NotMapped]
-        public IAccount Account {get; set; }
-
+        public DateTime Addon { get; set; } 
+        
         public void SetName(string name)
         {
                 this.Name = name;
@@ -33,6 +32,26 @@ public class AccountBank
         public void SetPassword(string password)
         {
                 this.Password = password;
+        }
+
+       
+        public void Deposit(decimal value)
+        {
+                this.Balance = Balance + value;
+        }
+
+        public bool Withdraw(decimal value)
+        {
+                if(value > Balance)
+                return false;
+
+                Balance = Balance - value;
+                return true;
+        }
+
+        public decimal CheckBalance()
+        {
+                return this.Balance;
         }
 
 }
