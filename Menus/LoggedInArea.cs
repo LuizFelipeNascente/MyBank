@@ -7,12 +7,12 @@ namespace MyBank.Menus;
 
 public class LoggedInArea
 {
-    public LoggedInArea(Guid id)
+    public LoggedInArea(Guid id, string? name)
     {
         {
         Console.Clear();
 
-        var panel = new Panel("Seja Bem Vindo! Selecione a opção desejada");
+        var panel = new Panel($"Seja Bem Vindo {name}! Selecione a opção desejada");
         panel.Border = BoxBorder.Double;
         AnsiConsole.Write(panel);
         
@@ -42,7 +42,7 @@ public class LoggedInArea
                 break;
 
                 case LoggedInMenuOption.Saque :
-                Console.Write("Digite quanto quer sacar:");
+                Console.Write("Digite quanto quer sacar: ");
                 decimal value = decimal.Parse(Console.ReadLine());
                 new AccountBank().Withdraw(value, id);
                 break;

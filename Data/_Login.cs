@@ -16,7 +16,8 @@ public class _Login
                 if(checkCredentials.Password == Password)
                 {   
                     var id = checkCredentials.Id;
-                    new LoggedInArea(id);
+                    var name = checkCredentials.Name;
+                    new LoggedInArea(id, name);
                 }  
                 else
                 {

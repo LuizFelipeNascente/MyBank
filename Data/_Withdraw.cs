@@ -13,8 +13,12 @@ public class _Withdraw
         account.Balance = newbalance;
         context.SaveChanges();
         return account.Balance;
+    }
 
-       
-        
+       public string CheckName(Guid id)
+    {
+        var context = new AppDbContext();
+        var account = context.Account.Find(id);
+        return account.Name;
     }
 }
