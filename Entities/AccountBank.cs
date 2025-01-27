@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using MyBank.Contracts;
+using MyBank.Data;
 using MyBank.Enums;
 
 namespace MyBank.Entities;
@@ -47,13 +48,13 @@ public class AccountBank : Account
         }
 
        
-        public void Deposit(decimal value)
+        public void _Deposit(decimal value)
         {
                 this.Balance = Balance + value;
         }
 
         
-        public bool Withdraw(decimal value)
+        public bool _Withdraw(decimal value)
         {
                 if(value > Balance)
                 return false;
@@ -61,10 +62,12 @@ public class AccountBank : Account
                 Balance = Balance - value;
                 return true;
         }
-
-        public decimal CheckBalance()
-        {
-                return this.Balance;
+       
+        public void CheckBalance(Guid id)
+        {       
+                var balance = new _CheckBalance().GetBalance(id);
+                Console.WriteLine($"Seu saldo é: R$ {balance}");
         }
+        
 
 }
