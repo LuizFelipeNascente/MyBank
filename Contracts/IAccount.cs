@@ -5,9 +5,9 @@ namespace MyBank.Contracts;
 
 public interface IAccount
 {
-    void Deposit (double value);
-    bool Withdraw (double value);
-    double CheckBalance();
+    void _Deposit (double value);
+    bool _Withdraw (double value);
+    decimal _CheckBalance();
     string CheckAccountNumber(); 
     void Create(AccountBank data);
 }
