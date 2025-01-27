@@ -7,7 +7,7 @@ namespace MyBank.Entities;
 public class Account
 {
 
-    public decimal Balance { get; protected set; } = 0;
+    public decimal Balance { get; set; } = 0;
     public int AccountNumber { get; private set; }
     public DateTime Addon { get; private set; } = DateTime.Now;
     
