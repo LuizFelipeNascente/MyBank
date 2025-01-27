@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using MyBank.Contracts;
 using MyBank.Data;
 using MyBank.Enums;
+using MyBank.Menus;
 
 namespace MyBank.Entities;
 
@@ -20,12 +21,12 @@ namespace MyBank.Entities;
 
 public class AccountBank : Account
 {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; } 
-        public string Password { get; set; }
-        public AccountStatus Status {get; set; } = AccountStatus.Active;
+        public Guid Id { get; private set; }
+        public string Name { get; private set; }
+        public string Phone { get; private set; }
+        public string Email { get; private set; } 
+        public string Password { get; private set; }
+        public AccountStatus Status {get; private set; } = AccountStatus.Active;
         
         public void SetName(string name)
         {
@@ -54,13 +55,19 @@ public class AccountBank : Account
         }
 
         
-        public bool _Withdraw(decimal value)
+        public void Withdraw(decimal value, Guid id)
         {
-                if(value > Balance)
-                return false;
-
-                Balance = Balance - value;
-                return true;
+               var balance = new _CheckBalance().GetBalance(id);
+               if(value > balance){
+               Console.WriteLine($"Saldo insulficiente! Seu saldo é: {balance}");
+               System.Threading.Thread.Sleep(1500); 
+               new LoggedInArea(id);}
+               else{ 
+               var withdraw = new _Withdraw();
+               var newbalance = balance - value;
+               withdraw.MakeWithdrawal(id, newbalance);
+               //new Transactions(value, id, "Saque");
+               }
         }
        
         public void CheckBalance(Guid id)

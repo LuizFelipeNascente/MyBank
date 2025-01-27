@@ -41,7 +41,10 @@ public class LoggedInArea
                 case LoggedInMenuOption.Transferência : Console.WriteLine("Seu saldo é");
                 break;
 
-                case LoggedInMenuOption.Saque : Console.WriteLine("Seu saldo é");
+                case LoggedInMenuOption.Saque :
+                Console.Write("Digite quanto quer sacar:");
+                decimal value = decimal.Parse(Console.ReadLine());
+                new AccountBank().Withdraw(value, id);
                 break;
                 
             }
