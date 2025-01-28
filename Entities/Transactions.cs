@@ -24,18 +24,11 @@ public class Transactions
     // Construtor parametrizado para regra de negocio
     // Recebendo o Id do usuário, valor da transação e tipo 
     // da transação como um texto. Por isso a conversão do tipo para o enum
-    public Transactions(decimal value, string type, Guid id)
+    public Transactions(decimal value, TransactionType type, Guid id)
     {
         Amount = value;
 
-        if (Enum.TryParse<TransactionType>(type, true, out var parsedType))
-        {
-            TransactionType = parsedType;
-        }
-        else
-        {
-            throw new ArgumentException($"O tipo de transação '{type}' é inválido.", nameof(type));
-        }
+       TransactionType = type;
 
         SourceAccountId = id;
         DestinationAccountId = null;
