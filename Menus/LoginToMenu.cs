@@ -35,7 +35,8 @@ public class LoginToMenu
                 Login();
                 
             }
-            
+            // Instacia a classe login mandando como parametros
+            // email e senha colhidos no console            
             new Login(email, password);
         }
 }

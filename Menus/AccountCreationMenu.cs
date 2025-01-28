@@ -53,13 +53,17 @@ public class AccountCreationMenu
                 CreateAccount();
             }
 
+            //Instancia a classe conta bancaria
             AccountBank accountBank = new AccountBank();
+            //Usa os metodos da clase para setar as informações colhidas no console
             accountBank.SetName(name);
             accountBank.SetPhone(phone);
             accountBank.SetEmail(email);
             accountBank.SetPassword(password);
 
+            //Instcia a classe de conta onde contem a conexão com o banco
             Account account = new Account();
+            // Envia para a conta os dados da nova conta criada
             account.Create(accountBank);
              
 
