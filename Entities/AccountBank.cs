@@ -66,7 +66,7 @@ public class AccountBank : Account
             // Instanciando a classe de transação, com valores do construtor da classe
             // junto com o valores do deposito atual, passados pelo usuário
             // e passando o tipo da transação em texto que será convertido em enum
-            var currentDeposit = new Transactions(value, "Deposito", id);
+            var currentDeposit = new Transactions(value, TransactionType.Deposito, id);
             // Instanciando a classe de conexão com o banco de dados
             // e passa a tranção atual como paramentro
             var saveTransaction = new _Transactions();
@@ -99,7 +99,7 @@ public class AccountBank : Account
                 // passando as informações do saque atual
                 // Instancia a classse passand os parametros e o restante das informações
                 // são implementados no prprio construtor.
-                var currentWithdrawal = new Transactions(value, "Saque", id);
+                var currentWithdrawal = new Transactions(value * -1, TransactionType.Saque, id);
 
                 // Isntancia a classe de conexão com o banco de dados
                 // e passa a tranção atual como paramentro
