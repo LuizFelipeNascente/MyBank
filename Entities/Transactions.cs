@@ -21,15 +21,12 @@ public class Transactions
         TransactionDate = DateTime.Now;
     }
 
-    // Construtor parametrizado para regra de negocio
     // Recebendo o Id do usuário, valor da transação e tipo 
     // da transação como um texto. Por isso a conversão do tipo para o enum
     public Transactions(decimal value, TransactionType type, Guid id)
     {
         Amount = value;
-
-       TransactionType = type;
-
+        TransactionType = type;
         SourceAccountId = id;
         DestinationAccountId = null;
         TransactionDate = DateTime.Now;

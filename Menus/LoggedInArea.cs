@@ -38,6 +38,7 @@ public class LoggedInArea
                 case LoggedInMenuOption.Depósito :
                 Console.Write("Digite quanto quer depositar: ");
                 decimal valueDeposit = decimal.Parse(Console.ReadLine());
+                // Instancia o Accoiunt e chama o metodo de deposito, passando o valor digitiado o id da conta
                 new AccountBank().Deposit(valueDeposit, id);
                 break;
 
@@ -47,6 +48,7 @@ public class LoggedInArea
                 case LoggedInMenuOption.Saque :
                 Console.Write("Digite quanto quer sacar: ");
                 decimal valueWithdraw = decimal.Parse(Console.ReadLine());
+                // Instancia o Accoiunt e chama o metodo para sacar, passando o valor digitiado o id da conta
                 new AccountBank().Withdraw(valueWithdraw, id);
                 break;
                 
