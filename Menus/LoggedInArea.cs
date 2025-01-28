@@ -35,7 +35,10 @@ public class LoggedInArea
                 case LoggedInMenuOption.Extrato : Console.WriteLine("Seu saldo é");
                 break;
 
-                case LoggedInMenuOption.Depósito : Console.WriteLine("Seu saldo é");
+                case LoggedInMenuOption.Depósito :
+                Console.Write("Digite quanto quer depositar: ");
+                decimal valueDeposit = decimal.Parse(Console.ReadLine());
+                new AccountBank().Deposit(valueDeposit, id);
                 break;
 
                 case LoggedInMenuOption.Transferência : Console.WriteLine("Seu saldo é");
@@ -43,8 +46,8 @@ public class LoggedInArea
 
                 case LoggedInMenuOption.Saque :
                 Console.Write("Digite quanto quer sacar: ");
-                decimal value = decimal.Parse(Console.ReadLine());
-                new AccountBank().Withdraw(value, id);
+                decimal valueWithdraw = decimal.Parse(Console.ReadLine());
+                new AccountBank().Withdraw(valueWithdraw, id);
                 break;
                 
             }

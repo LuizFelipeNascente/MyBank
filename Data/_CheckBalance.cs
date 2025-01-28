@@ -11,4 +11,11 @@ public class _CheckBalance
         var balance = context.Account.Find(id);
         return balance.Balance;
     }
+
+    public string CheckName(Guid id)
+    {
+        var context = new AppDbContext();
+        var account = context.Account.Find(id);
+        return account.Name;
+    }
 }
