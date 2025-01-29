@@ -1,50 +1,69 @@
 using System;
+using Microsoft.EntityFrameworkCore;
+using MyBank.Entities;
 using MyBank.Menus;
 
 namespace MyBank.Data;
 
 public class _Login
 {
-    public void Check(string Email, string Password)
+    // Novo metodo de verificação de email que recebe o email digitado
+    // retornando apenas verdadeiro ou falso para a regra do login
+    public bool CheckEmail(string email)
+    {   
+        // conexão com o banco
+        var context = new AppDbContext();
+        // Select no banco Account com a condição do do email digitado
+        // no check name tem o msm conceito, porém com o FirstOrDefault tras apenas
+        // o primeiro resultado (select top 1) e trás toda a linha do banco
+        var checkEmail = context.Account.FirstOrDefault(e => e.Email == email);
+        // Se o select não encontra dados, o metodo retorna falso
+        if(checkEmail == null)
+        {
+            return false;
+        } 
+        // Caso ele encontre, retorna true 
+        else
+        {
+            return true;
+        }
+    }
+
+    // Metodo para verificar o senha, caso o metodo CheckEmail
+    // retorne verdadeito na regra de negocio, esse metodo de verificação de senha 
+    // é chamado recebendo a senha e o email novamente
+    public bool CheckPassword(string email, string password)
+    {
+        // conexão com o banco
+        var context = new AppDbContext();
+        // busca no banco com where de email = email digitado
+        var checkPassword = context.Account.FirstOrDefault(e => e.Email == email);
+        // Não há verificação de null pois esse metodo só é chamado caso o email já existe
+        // regra do primeiro passo da logica do login
+        // Então quando localizado, ele verifica se a senha digitada bate com o banco em caso 
+        // de bater retorna true
+        if(checkPassword?.Password == password)
+        {
+            return true;
+        }
+        // Caso a senha não bata, retorna false
+        else
+        {
+            return false;
+        }
+
+    }
+
+    // Esse metodo foi impletado pois para ir para area logada 
+    // é necessario enviar o nome do usuário e id.
+    // Usado outro conceito de consulta sem usar linq e usando sql direto
+    public AccountInfoDTO CheckNameIdForEmail(string email)
     {
         var context = new AppDbContext();
-        try
-        {
-            var checkCredentials = context.Account.FirstOrDefault(c => c.Email == Email);
-            if(checkCredentials.Email != null)
-            {
-                if(checkCredentials.Password == Password)
-                {   
-                    var id = checkCredentials.Id;
-                    var name = checkCredentials.Name;
-                    new LoggedInArea(id, name);
-                }  
-                else
-                {
-                    Console.WriteLine("Email ou senha incorretos!");
-                    System.Threading.Thread.Sleep(1000); 
-                    new LoginToMenu().Login();
-                }
-            } 
-            else
-            {
-                Console.WriteLine("Dados invalidos! Tente novamente");
-                System.Threading.Thread.Sleep(1000); 
-                new LoginToMenu().Login();
-            }
-        } 
-        catch (NullReferenceException)
-        {
-            Console.WriteLine("Conta não encontrada");
-            System.Threading.Thread.Sleep(1000); 
-            new LoginToMenu().Login();
-
-        }
-        catch (ArgumentNullException)
-        {
-            Console.WriteLine("O email fornecido é nulo. Certifique-se de digitar um email válido.");
-            System.Threading.Thread.Sleep(1000); 
-            new LoginToMenu().Login();
-        }
+        var result = context.Account.FromSqlInterpolated($"SELECT AccountId, Name FROM Account WHERE Email = {email}")
+                                     .Select(a => new {a.AccountId, a.Name})
+                                     .FirstOrDefault();
+                                     
+        return new AccountInfoDTO { AccountId = result.AccountId, Name = result.Name };
     }
 }
