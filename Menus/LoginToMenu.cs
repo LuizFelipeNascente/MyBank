@@ -27,7 +27,7 @@ public class LoginToMenu
             }
 
             Console.Write("Digite sua Senha: ");
-            var password = Console.ReadLine();
+            string password = new Account().ReadPassword();
              if(string.IsNullOrEmpty(password)) 
             {
                 Console.Write("E-mail inválido");
