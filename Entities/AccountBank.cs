@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MyBank.Contracts;
 using MyBank.Data;
@@ -21,7 +22,8 @@ namespace MyBank.Entities;
 
 public class AccountBank : Account
 {
-        public Guid Id { get; private set; }
+        [Key]   
+        public Guid AccountId { get; private set; }
         public string Name { get; private set; }
         public string Phone { get; private set; }
         public string Email { get; private set; } 
