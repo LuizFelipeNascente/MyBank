@@ -14,7 +14,7 @@ public class AppDbContext : DbContext
 
             public AppDbContext()
             {
-                DbPath = "Mybank.db";
+                DbPath = "DataBase/Mybank.db";
             }
 
             protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlite($"Data Source={DbPath}");
