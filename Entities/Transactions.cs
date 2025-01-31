@@ -11,7 +11,7 @@ public class Transactions
     public decimal Amount { get; set; }
     public TransactionType TransactionType { get; set; }
     public Guid SourceAccountId { get; set; }
-    public string? DestinationAccountId { get; set; }
+    public Guid? DestinationAccountId { get; set; }
     public DateTime TransactionDate { get; private set; }
 
     // Construtor padrão definando a data da transação
@@ -23,12 +23,12 @@ public class Transactions
 
     // Recebendo o Id do usuário, valor da transação e tipo 
     // da transação como um texto. Por isso a conversão do tipo para o enum
-    public Transactions(decimal value, TransactionType type, Guid id)
+    public Transactions(decimal value, TransactionType type, Guid id, Guid? destinationAccountId = null)
     {
         Amount = value;
         TransactionType = type;
         SourceAccountId = id;
-        DestinationAccountId = null;
+        DestinationAccountId = destinationAccountId;
         TransactionDate = DateTime.Now;
     }
 }

@@ -5,6 +5,11 @@ namespace MyBank.Data;
 public class _Deposit
 {
     //Metodo para realizar um deposito, enviado o novo valor do saldo e id da conta
+    
+    // Subistitui o return
+    // public _Deposit(decimal newbalance, Guid id, out decimal balance) {
+    //    balance = MakeDeposit(newbalance, id);
+    //}
     public decimal MakeDeposit(decimal newbalance, Guid id)
     {
         // Conecetando ao contexto do banco

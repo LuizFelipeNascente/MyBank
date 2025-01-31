@@ -32,7 +32,7 @@ public class LoggedInArea
                 case LoggedInMenuOption.Saldo : new AccountBank().CheckBalance(id);
                 break;
 
-                case LoggedInMenuOption.Extrato : Console.WriteLine("Seu saldo é");
+                case LoggedInMenuOption.Extrato : Console.WriteLine("Seu extrato é");
                 break;
 
                 case LoggedInMenuOption.Depósito :
@@ -42,7 +42,15 @@ public class LoggedInArea
                 new AccountBank().Deposit(valueDeposit, id);
                 break;
 
-                case LoggedInMenuOption.Transferência : Console.WriteLine("Seu saldo é");
+                case LoggedInMenuOption.Transferência : 
+                
+                Console.Write("Digite quanto quer transferir: ");
+                decimal value = decimal.Parse(Console.ReadLine());
+                
+                Console.Write("Digite o codigo da conta para transferencia: ");
+                int accountId = int.Parse(Console.ReadLine());
+
+                new AccountBank().Transfer(id, value, accountId);
                 break;
 
                 case LoggedInMenuOption.Saque :

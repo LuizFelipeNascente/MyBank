@@ -109,6 +109,52 @@ public class AccountBank : Account
                 saveTransaction.TransactionWithdraw(currentWithdrawal);
             }
         }
+
+        public void Transfer(Guid idOrigin, decimal value, int CodeAccountDestination)
+        {
+            // Verifica se o valor transferido é  menor que o valor disponivel na conta
+            var balanceOrigin = new _CheckBalance().GetBalance(idOrigin);
+            if(value > balanceOrigin)
+            {
+                Console.WriteLine($"Saldo insulficiente para trasferência! Seu saldo é: {balanceOrigin}");
+                System.Threading.Thread.Sleep(2000); 
+                // instanciando um novo metodo para checar o nome do usuario
+                // para voltar com nome no titulo na area logada
+                var name = new _Withdraw().CheckName(idOrigin);
+                new LoggedInArea(idOrigin, name);
+            }
+            else
+            { 
+                var idDestination = new _Transfer().GetGuidForAccountId(CodeAccountDestination);
+                // Instanciando a classe para fazer saque
+                //=> var withdraw = new _Withdraw();
+                //Retira o valor da transferencia da conta origem
+                var newbalanceOrigin = balanceOrigin - value;
+                // Realizar a chamada do saque passando a conta de origem e novo valor do saldo após a retirada
+                //withdraw.MakeWithdrawal(idOrigin, newbalanceOrigin);
+
+                // Instancia a verificação do saldo da conta destino                
+                var balanceDestination = new _CheckBalance().GetBalance(idDestination);
+                // Instanciando a classe de deposito
+               // => var deposit = new _Deposit();
+                // Adicionado o valor input do cliente ao valor atual do saldo 
+                // valor depositado + valor atual em conta 
+                var newbalanceDestination = balanceDestination + value;
+                //enviando o deposito para a classe instanciada
+               // deposit.MakeDeposit(newbalanceDestination, idDestination);
+
+                // instancia a classe de transferencia
+                var transfer = new _Transfer();
+                // Chama o metodo de realizar transferencia mandando os ids envolvidos e o novos valores de saldo
+                transfer.MakeTransfer(idOrigin, newbalanceOrigin, idDestination, newbalanceDestination);
+
+                var currentTransfer = new Transactions(value, TransactionType.Transferencia, idOrigin, idDestination);
+
+                var saveTransaction = new _Transactions();
+                saveTransaction.TransactionWithdraw(currentTransfer);
+
+            }
+        }
        
         public void CheckBalance(Guid id)
         {
