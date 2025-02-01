@@ -63,12 +63,12 @@ public class _Transactions
         // Salva as alterações feitoas 
         context.SaveChanges();
 
-        //Instancia uma verificação de saldo após o saque
+        //Instancia uma verificação de saldo após a trasnferencia
         var currentBalance = new _CheckBalance().GetBalance(saveTransaction.SourceAccountId);
         //Mostra em tela o valor sacado, vindo da transação e usa o instancia do salva para mostrar o valor restante na conta.
-        Console.WriteLine($"\nDeposito de R$ {saveTransaction.Amount} realizado com sucesso \n=================================== \n \nSeu Saldo atual é de R$ {currentBalance}");
+        Console.WriteLine($"\nTransferência de R$ {saveTransaction.Amount} realizada com sucesso \n=================================== \n \nSeu Saldo atual é de R$ {currentBalance}");
         //Espera 2 segundos
-        System.Threading.Thread.Sleep(5000);
+        System.Threading.Thread.Sleep(4000);
         // Faz uma verificação do nome do usuário origem ou destino da transação
         var name = CheckName(saveTransaction.SourceAccountId);
         //Leva de volta para area logada passando o id do usuário.

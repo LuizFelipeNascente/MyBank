@@ -125,33 +125,30 @@ public class AccountBank : Account
             }
             else
             { 
+                // Busca o guid da conta destino atraves do codigo da conta passado no front
                 var idDestination = new _Transfer().GetGuidForAccountId(CodeAccountDestination);
-                // Instanciando a classe para fazer saque
-                //=> var withdraw = new _Withdraw();
-                //Retira o valor da transferencia da conta origem
+               
+                //Retira o valor da transferencia do saldo da conta de origem
                 var newbalanceOrigin = balanceOrigin - value;
-                // Realizar a chamada do saque passando a conta de origem e novo valor do saldo após a retirada
-                //withdraw.MakeWithdrawal(idOrigin, newbalanceOrigin);
-
+                
                 // Instancia a verificação do saldo da conta destino                
                 var balanceDestination = new _CheckBalance().GetBalance(idDestination);
-                // Instanciando a classe de deposito
-               // => var deposit = new _Deposit();
-                // Adicionado o valor input do cliente ao valor atual do saldo 
-                // valor depositado + valor atual em conta 
+                
+                // Adicionado o valor input do cliente ao valor atual do saldo da conta destino
                 var newbalanceDestination = balanceDestination + value;
-                //enviando o deposito para a classe instanciada
-               // deposit.MakeDeposit(newbalanceDestination, idDestination);
-
+                
                 // instancia a classe de transferencia
                 var transfer = new _Transfer();
                 // Chama o metodo de realizar transferencia mandando os ids envolvidos e o novos valores de saldo
                 transfer.MakeTransfer(idOrigin, newbalanceOrigin, idDestination, newbalanceDestination);
 
+                // Instacia a classe para iniciar uma nova transação do tipo transferecia
+                // montando a transação atual
                 var currentTransfer = new Transactions(value, TransactionType.Transferencia, idOrigin, idDestination);
-
+                // Instancia a classe que faz conexão com o banco de dados 
                 var saveTransaction = new _Transactions();
-                saveTransaction.TransactionWithdraw(currentTransfer);
+                // Manda como parametro a nova transação
+                saveTransaction.TransactionTransfer(currentTransfer);
 
             }
         }

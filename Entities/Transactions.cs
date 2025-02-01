@@ -22,7 +22,8 @@ public class Transactions
     }
 
     // Recebendo o Id do usuário, valor da transação e tipo 
-    // da transação como um texto. Por isso a conversão do tipo para o enum
+    // da transação. Já a data é gerada quando o classe é
+    // instanciada por conta do construtor
     public Transactions(decimal value, TransactionType type, Guid id, Guid? destinationAccountId = null)
     {
         Amount = value;
