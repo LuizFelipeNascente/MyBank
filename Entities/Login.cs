@@ -40,16 +40,20 @@ public class Login
         // Se existir, realiza a logica de verifica a senha, se não existir volta para o input
         if(checkEmail == true)
         {
+            // Inicializando dados para retorno do out
+            string userName;
+            Guid accountId;
+
             // Instanciando o metodo que verifica se a senha digitada bate com a senha do banco
             // envia o email novamente para um novo select
-            var checkPassword = new _Login().CheckPassword(email, password);
+            var checkPassword = new _Login().CheckPassword(email, password, out userName, out accountId);
             // Se a senha bater, instancia um outro metodo e depois manda para area logada
             if(checkPassword == true)
             {
                 // Senha bate então o metodo para verificar o nome e id da conta é instanciado
                 var name = new _Login().CheckNameIdForEmail(email);
                 // Encaminha para area logada manda nome e id da conta que logou
-                new LoggedInArea(name.AccountId, name.Name);
+                new LoggedInArea(accountId, userName);
                 
             }
             else
